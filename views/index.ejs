@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 font-serif">
+    <div class="flex justify-center">
+        <h1 class="text-7xl">Notes</h1>
+    </div>
+
+    <div class="flex justify-center">
+        <div class="p-4 bg-indigo-800/75 max-w-max rounded-lg">
+            <h2 class="text-white ">New Note</h2>
+            <form method="POST" action="/addNote">
+                <input class="rounded-lg mt-2 md:mt-0" type="text" name="note" placeholder="Content">
+                <input class="rounded-lg mt-2 md:mt-0" type="text" name="author" placeholder="Author">
+                <input class="rounded-lg mt-2 md:mt-0" type="date" name="date">
+                <button class="text-white ml-2 submit-btn mt-2 md:mt-0" type="submit">Submit</button>
+            </form>
+        </div>
+        <div class="p-4 bg-indigo-800/75 max-w-max ml-2 rounded-lg">
+            <ul class="text-white">
+                <% if(users.length === 0) { %>
+                    <li>Please Enter a User</li>
+                <% } %> 
+                <% for(let i = 0; i < users.length; i++) { %>
+                    <li> <%= users[i] %> </li>
+                <% } %>  
+            </ul>
+        </div>
+    </div>
+    <div>
+        <div class="flex justify-center">
+            <span class="bg-slate-50/25 rounded-lg px-2 mt-2">Total Notes: <%= total %> </span>
+        </div>
+        <% for(let i = 0; i < info.length; i++) { %>
+            <div class="bg-slate-50/25 mx-8 rounded-lg mt-2 flex items-center">
+                <% if(info[i].completed === true) { %> 
+                    <span class="copmleted ml-2 basis-3/5 text-white-800/25 line-through"><%= info[i].note %></span>
+                    <span class="copmleted basis-1/5 text-white-800/25 line-through"><%= info[i].author %></span>
+                    <span class="copmleted basis-1/5 text-white-800/25 line-through"><%= info[i].date %></span>
+                    <span class="uncomplete-btn cursor-pointer text-white mr-2">Uncomplete</button>
+                <% } else { %>
+                    <span class="ml-2 basis-3/5"><%= info[i].note %></span>
+                    <span class="basis-1/5"><%= info[i].author %></span>
+                    <span class="basis-1/5"><%= info[i].date %></span>
+                    <span class="complete-btn cursor-pointer text-white mr-2">Complete</button>
+                <% } %> 
+            </div>
+        <% } %>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
